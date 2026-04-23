@@ -206,8 +206,23 @@ nav.scrolled{background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bot
 .filter-btn:hover,.filter-btn.active{background:var(--fg);color:#0a0a0a;border-color:var(--fg)}
 
 /* Project Grid */
-.project-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(350px,1fr));gap:24px}
+.project-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:28px;
+}
+
 .project-card{
+  overflow:hidden;
+  border-radius:8px;
+  background:var(--card-bg);
+  border:1px solid var(--border);
+}
+
+.project-thumb{
+  aspect-ratio:4/3;
+  position:relative;
+}.project-card{
   position:relative;overflow:hidden;border-radius:8px;
   background:var(--card-bg);border:1px solid var(--border);
   transition:transform .5s var(--ease),box-shadow .5s var(--ease),opacity .4s;
