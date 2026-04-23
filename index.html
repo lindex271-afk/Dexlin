@@ -219,6 +219,12 @@ nav.scrolled{background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bot
   overflow:hidden;aspect-ratio:4/3;position:relative;
 }
 .project-thumb img{
+  .project-thumb video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
   width:100%;height:100%;object-fit:cover;
   transition:transform .6s var(--ease);
 }
@@ -507,12 +513,14 @@ footer{
   </div>
 
   <div class="filter-bar reveal">
-    <button class="filter-btn active" data-filter="all">All</button>
-    <button class="filter-btn" data-filter="luxury">Luxury</button>
-    <button class="filter-btn" data-filter="sport">Sport</button>
-    <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
-    <button class="filter-btn" data-filter="social">F&B / Social</button>
-    <button class="filter-btn" data-filter="other">Other</button>
+  <button class="filter-btn active" data-filter="all">All</button>
+  <button class="filter-btn" data-filter="luxury">Luxury</button>
+  <button class="filter-btn" data-filter="sport">Sport</button>
+  <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+  <button class="filter-btn" data-filter="social">F&B / Social</button>
+  <button class="filter-btn" data-filter="motion">Motion</button>
+  <button class="filter-btn" data-filter="other">Other</button>
+</div>
   </div>
 
   <div class="project-grid" id="projectGrid">
@@ -734,57 +742,20 @@ footer{
       </div>
     </div>
   </div>
-  <!-- MOTION 01 -->
-<div class="project-card reveal" data-category="motion">
+ 
+<!-- MOTION -->
+<div class="project-card reveal" 
+     data-category="motion"
+     data-videos="images/motion/video-2.mp4,images/motion/video-3.mp4,images/motion/video-1.mov,images/motion/video-4.mov">
   <div class="project-thumb">
-    <video autoplay muted loop playsinline preload="metadata">
-      <source src="images/motion/video-2.mp4" type="video/mp4">
-    </video>
+    <img src="images/motion/video-cover.jpg" alt="Motion Reel">
   </div>
   <div class="project-info">
-    <div class="project-brand">EVENT FILM</div>
-    <div class="project-category">Motion</div>
+    <div class="project-brand">MOTION</div>
+    <div class="project-category">Campaign Film</div>
   </div>
 </div>
 
-<!-- MOTION 02 -->
-<div class="project-card reveal" data-category="motion">
-  <div class="project-thumb">
-    <video autoplay muted loop playsinline preload="metadata">
-      <source src="images/motion/video-3.mp4" type="video/mp4">
-    </video>
-  </div>
-  <div class="project-info">
-    <div class="project-brand">BRAND STORY</div>
-    <div class="project-category">Motion</div>
-  </div>
-</div>
-
-<!-- MOTION 03 -->
-<div class="project-card reveal" data-category="motion">
-  <div class="project-thumb">
-    <video autoplay muted loop playsinline preload="metadata">
-      <source src="images/motion/video-1.mov" type="video/quicktime">
-    </video>
-  </div>
-  <div class="project-info">
-    <div class="project-brand">SHOWREEL</div>
-    <div class="project-category">Motion</div>
-  </div>
-</div>
-
-<!-- MOTION 04 -->
-<div class="project-card reveal" data-category="motion">
-  <div class="project-thumb">
-    <video autoplay muted loop playsinline preload="metadata">
-      <source src="images/motion/video-4.mov" type="video/quicktime">
-    </video>
-  </div>
-  <div class="project-info">
-    <div class="project-brand">CAMPAIGN FILM</div>
-    <div class="project-category">Motion</div>
-  </div>
-</div>
 </section>
 
 <!-- BRANDS -->
@@ -897,7 +868,10 @@ footer{
   <button class="lightbox-close" onclick="closeLightbox()">✕</button>
   <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
   <div class="lightbox-content">
-    <img id="lightboxImg" src="" alt="">
+    <img id="lightboxImg" src="" alt="" style="display:none;">
+    <video id="lightboxVideo" controls playsinline style="display:none; max-width:90vw; max-height:85vh; border-radius:4px;">
+      <source id="lightboxVideoSource" src="">
+    </video>
     <div class="lightbox-caption" id="lightboxCaption"></div>
   </div>
   <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
@@ -989,22 +963,30 @@ filterBtns.forEach(btn => {
 });
 
 // ============ LIGHTBOX ============
-let currentImages = [];
+let currentMedia = [];
 let currentIndex = 0;
 let currentBrand = '';
+let currentMediaType = 'image';
 
 document.querySelectorAll('.project-card').forEach(card => {
   card.addEventListener('click', () => {
-    const images = card.dataset.images.split(',');
     const brand = card.querySelector('.project-brand').textContent;
-    openLightbox(images, 0, brand);
+
+    if (card.dataset.videos) {
+      const videos = card.dataset.videos.split(',');
+      openLightbox(videos, 0, brand, 'video');
+    } else if (card.dataset.images) {
+      const images = card.dataset.images.split(',');
+      openLightbox(images, 0, brand, 'image');
+    }
   });
 });
 
-function openLightbox(images, index, brand) {
-  currentImages = images;
+function openLightbox(media, index, brand, type) {
+  currentMedia = media;
   currentIndex = index;
   currentBrand = brand;
+  currentMediaType = type;
   updateLightbox();
   document.getElementById('lightbox').classList.add('active');
   document.body.style.overflow = 'hidden';
@@ -1013,17 +995,50 @@ function openLightbox(images, index, brand) {
 function closeLightbox() {
   document.getElementById('lightbox').classList.remove('active');
   document.body.style.overflow = '';
+
+  const video = document.getElementById('lightboxVideo');
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+  }
 }
 
 function navigateLightbox(dir) {
-  currentIndex = (currentIndex + dir + currentImages.length) % currentImages.length;
+  currentIndex = (currentIndex + dir + currentMedia.length) % currentMedia.length;
   updateLightbox();
 }
 
 function updateLightbox() {
-  document.getElementById('lightboxImg').src = currentImages[currentIndex];
-  document.getElementById('lightboxCaption').textContent =
-    currentBrand + (currentImages.length > 1 ? ` — ${currentIndex + 1} / ${currentImages.length}` : '');
+  const img = document.getElementById('lightboxImg');
+  const video = document.getElementById('lightboxVideo');
+  const videoSource = document.getElementById('lightboxVideoSource');
+  const caption = document.getElementById('lightboxCaption');
+
+  if (currentMediaType === 'video') {
+    img.style.display = 'none';
+    video.style.display = 'block';
+    video.pause();
+
+    videoSource.src = currentMedia[currentIndex];
+
+    if (currentMedia[currentIndex].toLowerCase().endsWith('.mp4')) {
+      videoSource.type = 'video/mp4';
+    } else if (currentMedia[currentIndex].toLowerCase().endsWith('.mov')) {
+      videoSource.type = 'video/quicktime';
+    } else {
+      videoSource.type = '';
+    }
+
+    video.load();
+  } else {
+    video.pause();
+    video.style.display = 'none';
+    img.style.display = 'block';
+    img.src = currentMedia[currentIndex];
+  }
+
+  caption.textContent =
+    currentBrand + (currentMedia.length > 1 ? ` — ${currentIndex + 1} / ${currentMedia.length}` : '');
 }
 
 // Keyboard navigation
