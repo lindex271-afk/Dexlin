@@ -614,6 +614,33 @@ button{font:inherit}
   .media-modal{padding:12px}
   .media-modal-shell{height:min(92vh,900px)}
 }
+/* MOBILE FIX — force Case Study to show */
+@media (max-width:720px){
+  .reveal{
+    opacity:1 !important;
+    transform:none !important;
+  }
+
+  .selected-work,
+  .work-shell,
+  #workGrid{
+    display:block !important;
+    opacity:1 !important;
+    visibility:visible !important;
+  }
+
+  .work-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:18px !important;
+  }
+
+  .carousel-card{
+    display:flex !important;
+    opacity:1 !important;
+    visibility:visible !important;
+  }
+}
 </style>
 </head>
 
