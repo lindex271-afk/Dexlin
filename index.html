@@ -3,1102 +3,968 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dex Lin — Creative Director</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<title>Dex Lin — Creative Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
-/* ============ RESET & BASE ============ */
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0a0a0a;--fg:#f0f0f0;--muted:#777;--accent:#f0f0f0;
-  --card-bg:#161616;--border:#252525;
+  --bg:#050505;
+  --panel:#101010;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.16);
+  --text:#f2f2ee;
+  --muted:#9a9a92;
+  --accent:#d8ff3e;
   --ease:cubic-bezier(.22,1,.36,1);
+  --radius:22px;
+  --nav-h:76px;
 }
-html{scroll-behavior:smooth;font-size:16px;overflow-x:hidden}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
 body{
-  font-family:'Inter',sans-serif;background:var(--bg);color:var(--fg);
-  cursor:none;overflow-x:hidden;
+  font-family:'Inter',system-ui,sans-serif;
+  background:radial-gradient(circle at top,#0d1016 0%, #050505 32%) fixed;
+  color:var(--text);
+  overflow-x:hidden;
 }
-/* Noise texture overlay */
 body::before{
-  content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-  background-repeat:repeat;background-size:256px 256px;opacity:.4;
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.045'/%3E%3C/svg%3E");
+  opacity:.35;
+  mix-blend-mode:soft-light;
 }
+img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
-img{display:block;max-width:100%;height:auto}
+button{font:inherit}
 
-/* ============ CUSTOM CURSOR ============ */
-.cursor{
-  position:fixed;width:12px;height:12px;border-radius:50%;
-  background:#fff;pointer-events:none;z-index:10000;
-  transition:transform .15s var(--ease),opacity .15s;
-  mix-blend-mode:difference;
+.container{
+  width:min(1440px,calc(100vw - 40px));
+  margin:0 auto;
+  position:relative;
+  z-index:2;
 }
-.cursor-follower{
-  position:fixed;width:40px;height:40px;border-radius:50%;
-  border:1px solid rgba(255,255,255,.5);pointer-events:none;z-index:9999;
-  transition:transform .4s var(--ease),width .3s,height .3s,opacity .3s;
-}
-.cursor-follower.hover{width:60px;height:60px;border-color:rgba(255,255,255,.8);background:rgba(255,255,255,.06)}
-.cursor-follower.project-hover{width:100px;height:100px;background:rgba(255,255,255,.9);border:none}
-.cursor-follower.project-hover::after{
-  content:'VIEW';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  color:#0a0a0a;font-size:10px;letter-spacing:2px;font-weight:600;
-}
-
-@media(max-width:768px){
-  .cursor,.cursor-follower{display:none!important}
-  body{cursor:auto}
-}
-
-/* ============ PRELOADER ============ */
-.preloader{
-  position:fixed;inset:0;background:#000;z-index:99999;
-  display:flex;align-items:center;justify-content:center;
-  transition:opacity .6s var(--ease),visibility .6s;
-}
-.preloader.hidden{opacity:0;visibility:hidden}
-.preloader-text{
-  color:#fff;font-size:clamp(1.5rem,4vw,3rem);font-weight:200;letter-spacing:.3em;
+.section{padding:32px 0 0}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  color:var(--muted);
+  font-size:.73rem;
+  letter-spacing:.16em;
   text-transform:uppercase;
 }
-.preloader-text span{display:inline-block;opacity:0;transform:translateY(20px);animation:preloaderIn .5s var(--ease) forwards}
-.preloader-text span:nth-child(1){animation-delay:.1s}
-.preloader-text span:nth-child(2){animation-delay:.15s}
-.preloader-text span:nth-child(3){animation-delay:.2s}
-.preloader-text span:nth-child(4){animation-delay:.25s}
-.preloader-text span:nth-child(5){animation-delay:.3s}
-.preloader-text span:nth-child(6){animation-delay:.35s}
-.preloader-text span:nth-child(7){animation-delay:.4s}
-.preloader-text span:nth-child(8){animation-delay:.45s}
-@keyframes preloaderIn{to{opacity:1;transform:translateY(0)}}
-
-/* ============ NAVIGATION ============ */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:1000;
-  padding:24px 48px;display:flex;justify-content:space-between;align-items:center;
-  transition:background .3s,backdrop-filter .3s;
+.eyebrow::before{
+  content:"";
+  width:8px;
+  height:8px;
+  border-radius:999px;
+  background:var(--accent);
+  box-shadow:0 0 18px rgba(216,255,62,.65);
 }
-nav.scrolled{background:rgba(10,10,10,.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-.nav-logo{font-size:1.1rem;font-weight:700;letter-spacing:.05em}
-.nav-logo span{font-weight:300;opacity:.5;margin-left:4px}
-.nav-links{display:flex;gap:32px;align-items:center}
+.headline{
+  font-size:clamp(2.6rem,6vw,6.2rem);
+  line-height:.96;
+  letter-spacing:-.055em;
+  font-weight:800;
+  max-width:13ch;
+}
+.headline em{
+  font-family:'Instrument Serif',serif;
+  font-style:italic;
+  font-weight:400;
+}
+.body-copy{
+  color:var(--muted);
+  font-size:1rem;
+  line-height:1.85;
+  max-width:76ch;
+  white-space:pre-line;
+}
+
+/* NAV */
+.nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  backdrop-filter:blur(18px);
+  background:linear-gradient(to bottom,rgba(5,5,5,.86),rgba(5,5,5,.58));
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{
+  height:var(--nav-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:18px;
+}
+.nav-logo{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-size:1rem;
+  font-weight:700;
+  letter-spacing:.04em;
+}
+.nav-logo .dot{
+  width:10px;
+  height:10px;
+  border-radius:999px;
+  background:var(--accent);
+  box-shadow:0 0 20px rgba(216,255,62,.7);
+}
+.nav-links{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
 .nav-links a{
-  font-size:.8rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
-  position:relative;padding:4px 0;
+  padding:10px 14px;
+  border:1px solid transparent;
+  border-radius:999px;
+  color:var(--muted);
+  font-size:.79rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  transition:.28s var(--ease);
 }
-.nav-links a::after{
-  content:'';position:absolute;bottom:0;left:0;width:0;height:1px;
-  background:var(--fg);transition:width .3s var(--ease);
-}
-.nav-links a:hover::after{width:100%}
-
-/* ============ HERO ============ */
-.hero{
-  min-height:100vh;display:flex;flex-direction:column;justify-content:center;
-  padding:120px 48px 80px;position:relative;overflow:hidden;
-}
-.hero-eyebrow{
-  font-size:.75rem;letter-spacing:.25em;text-transform:uppercase;color:var(--muted);
-  margin-bottom:24px;opacity:0;transform:translateY(20px);
-  animation:fadeUp .8s var(--ease) .8s forwards;
-}
-.hero-title{
-  font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,7rem);
-  font-weight:400;line-height:1.05;margin-bottom:32px;
-  opacity:0;transform:translateY(40px);
-  animation:fadeUp 1s var(--ease) 1s forwards;
-}
-.hero-title em{font-style:italic;font-weight:400;background:linear-gradient(135deg,#fff,#999);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-subtitle{
-  max-width:500px;font-size:1rem;line-height:1.8;color:var(--muted);font-weight:300;
-  opacity:0;transform:translateY(20px);
-  animation:fadeUp .8s var(--ease) 1.2s forwards;
-}
-.hero-scroll{
-  position:absolute;bottom:48px;left:48px;
-  display:flex;align-items:center;gap:12px;
-  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);
-  opacity:0;animation:fadeUp .8s var(--ease) 1.5s forwards;
-}
-.hero-scroll .line{width:40px;height:1px;background:var(--muted);animation:scrollLine 2s infinite}
-@keyframes scrollLine{0%,100%{transform:scaleX(1);transform-origin:left}50%{transform:scaleX(.3);transform-origin:left}}
-@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-
-/* floating Mac folders */
-.hero-shapes{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.hero-folder{
-  position:absolute;opacity:.18;
-  animation:folderFloat 18s infinite ease-in-out;
-  filter:drop-shadow(0 4px 12px rgba(0,0,0,.3));
-}
-.hero-folder svg{width:100%;height:100%}
-.hero-folder:nth-child(1){width:90px;top:12%;right:8%;animation-delay:0s;opacity:.22}
-.hero-folder:nth-child(2){width:60px;top:45%;left:5%;animation-delay:-4s;opacity:.12}
-.hero-folder:nth-child(3){width:110px;bottom:18%;right:15%;animation-delay:-8s;opacity:.16}
-.hero-folder:nth-child(4){width:50px;top:25%;left:30%;animation-delay:-12s;opacity:.1}
-.hero-folder:nth-child(5){width:75px;bottom:30%;left:18%;animation-delay:-6s;opacity:.14}
-.hero-folder:nth-child(6){width:45px;top:60%;right:35%;animation-delay:-2s;opacity:.09}
-@keyframes folderFloat{
-  0%,100%{transform:translate(0,0) rotate(0deg)}
-  25%{transform:translate(15px,-20px) rotate(3deg)}
-  50%{transform:translate(-10px,15px) rotate(-2deg)}
-  75%{transform:translate(20px,10px) rotate(1deg)}
+.nav-links a:hover{
+  border-color:var(--line-strong);
+  color:var(--text);
+  background:rgba(255,255,255,.04);
 }
 
-/* ============ MARQUEE ============ */
-.marquee-section{
-  padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
-  overflow:hidden;
-}
-.marquee-track{
-  display:flex;gap:60px;animation:marquee 30s linear infinite;white-space:nowrap;
-}
-.marquee-track span{
-  font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);font-weight:500;
-  display:flex;align-items:center;gap:16px;flex-shrink:0;
-}
-.marquee-track span::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--muted);opacity:.4}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ============ ABOUT ============ */
-.about{padding:160px 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
-.about-image{
-  position:relative;overflow:hidden;border-radius:8px;aspect-ratio:1;
-}
-.about-image img{width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease)}
-.about-image:hover img{transform:scale(1.05)}
-.about-image::after{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(0,0,0,.1),transparent);pointer-events:none;
-}
-.about-content h2{
-  font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);
-  font-weight:400;margin-bottom:32px;
-}
-.about-content p{font-size:.95rem;line-height:2;color:var(--muted);margin-bottom:20px;font-weight:300}
-.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-.stat{border-top:1px solid var(--border);padding-top:16px}
-.stat-number{font-size:2rem;font-weight:700;line-height:1}
-.stat-label{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:8px}
-
-/* ============ WORK SECTION ============ */
-.work{padding:120px 48px 80px}
-.section-header{
-  display:flex;justify-content:space-between;align-items:flex-end;
-  margin-bottom:64px;flex-wrap:wrap;gap:24px;
-}
-.section-header h2{
-  font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:400;
-}
-.section-header p{font-size:.85rem;color:var(--muted);max-width:400px;line-height:1.7;font-weight:300}
-
-/* Filter Tabs */
-.filter-bar{
-  display:flex;gap:8px;margin-bottom:48px;flex-wrap:wrap;
-}
-.filter-btn{
-  padding:10px 24px;border:1px solid var(--border);border-radius:100px;
-  background:transparent;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;
-  font-family:'Inter',sans-serif;cursor:none;transition:all .3s var(--ease);font-weight:500;
-}
-.filter-btn{color:var(--muted)}
-.filter-btn:hover,.filter-btn.active{background:var(--fg);color:#0a0a0a;border-color:var(--fg)}
-
-/* Project Grid */
-.project-grid{
+/* HERO */
+.hero{padding:42px 0 24px}
+.hero-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
-  gap:28px;
+  grid-template-columns:1fr;
+  gap:20px;
+  align-items:stretch;
 }
-
-.project-card{
-  overflow:hidden;
-  border-radius:8px;
-  background:var(--card-bg);
-  border:1px solid var(--border);
-}
-
-.project-thumb{
-  aspect-ratio:4/3;
+.hero-panel,.carousel-card,.about-card,.service-card,.work-shell,.contact-shell,.media-modal-shell{
+  border:1px solid var(--line);
+  background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.015));
+  border-radius:var(--radius);
   position:relative;
-}.project-card{
-  position:relative;overflow:hidden;border-radius:8px;
-  background:var(--card-bg);border:1px solid var(--border);
-  transition:transform .5s var(--ease),box-shadow .5s var(--ease),opacity .4s;
-  cursor:none;
+  overflow:hidden;
+  box-shadow:0 18px 80px rgba(0,0,0,.22);
 }
-.project-card.hidden{opacity:0;pointer-events:none;position:absolute;visibility:hidden}
-.project-card:hover{transform:translateY(-8px);box-shadow:0 20px 60px rgba(0,0,0,.4)}
-.project-thumb{
-  overflow:hidden;aspect-ratio:4/3;position:relative;
+.hero-panel{
+  padding:38px;
+  min-height:82vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
 }
-.project-thumb img{
-  .project-thumb video{
+.hero-kicker{
+  display:flex;
+  justify-content:space-between;
+  gap:16px;
+  align-items:flex-start;
+}
+.hero-right-note{
+  max-width:300px;
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.7;
+}
+.hero-actions{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+.btn{
+  border-radius:999px;
+  padding:14px 18px;
+  border:1px solid var(--line-strong);
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+  transition:.28s var(--ease);
+}
+.btn.primary{
+  background:var(--text);
+  color:#080808;
+  border-color:var(--text);
+  font-weight:700;
+}
+.btn.secondary{color:var(--muted)}
+.btn:hover{transform:translateY(-2px)}
+.hero-foot{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:34px;
+}
+.hero-metric{
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.025);
+  border-radius:var(--radius);
+  padding:18px 20px;
+  min-height:128px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.hero-metric strong{
+  font-size:2rem;
+  letter-spacing:-.05em;
+}
+.hero-metric span{
+  color:var(--muted);
+  font-size:.78rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+
+/* TICKER */
+.ticker{padding:16px 0 0}
+.ticker-shell{
+  overflow:hidden;
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+}
+.ticker-track{
+  display:flex;
+  gap:56px;
+  white-space:nowrap;
+  padding:18px 0;
+  animation:marquee 22s linear infinite;
+}
+.ticker-track span{
+  font-size:.84rem;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+@keyframes marquee{
+  from{transform:translateX(0)}
+  to{transform:translateX(-50%)}
+}
+
+/* ABOUT */
+.about{padding-top:26px}
+.about-grid{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:20px;
+}
+.about-card{padding:28px}
+.about-layout{
+  display:grid;
+  grid-template-columns:320px 1fr;
+  gap:24px;
+  align-items:center;
+}
+.portrait{
+  aspect-ratio:1/1.12;
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  background:#0a0a0a;
+}
+.portrait img{
   width:100%;
   height:100%;
   object-fit:cover;
-  display:block;
 }
-  width:100%;height:100%;object-fit:cover;
+.about-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-top:26px;
+}
+.about-stat{
+  padding:16px;
+  border-top:1px solid var(--line);
+  background:rgba(255,255,255,.02);
+  border-radius:14px;
+}
+.about-stat strong{
+  display:block;
+  font-size:1.85rem;
+  letter-spacing:-.04em;
+}
+.about-stat span{
+  font-size:.73rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.mini-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  height:100%;
+}
+.mini-card{
+  border:1px solid var(--line);
+  border-radius:18px;
+  overflow:hidden;
+  position:relative;
+  background:#0a0a0a;
+  min-height:220px;
+}
+.mini-card img,.mini-card video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.mini-card .label{
+  position:absolute;
+  left:14px;
+  bottom:14px;
+  padding:8px 10px;
+  border-radius:999px;
+  background:rgba(0,0,0,.55);
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+/* SERVICES */
+.services{padding-top:26px}
+.section-top{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-end;
+  margin-bottom:18px;
+}
+.service-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+.service-card{
+  padding:22px;
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  transition:.3s var(--ease);
+}
+.service-card:hover{
+  transform:translateY(-5px);
+  border-color:var(--line-strong);
+}
+.service-card .num{
+  font-size:.82rem;
+  color:var(--muted);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.service-card h3{
+  font-size:1.15rem;
+  letter-spacing:-.03em;
+}
+.service-card p{
+  font-size:.94rem;
+  line-height:1.8;
+  color:var(--muted);
+}
+
+/* WORK */
+.selected-work{padding-top:26px}
+.work-shell{padding:22px}
+.work-top{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-end;
+  margin-bottom:18px;
+}
+.filters{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.filter-btn{
+  border-radius:999px;
+  border:1px solid var(--line-strong);
+  background:transparent;
+  color:var(--muted);
+  padding:10px 14px;
+  cursor:pointer;
+  transition:.25s var(--ease);
+  font-size:.77rem;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.filter-btn.active,.filter-btn:hover{
+  background:var(--text);
+  border-color:var(--text);
+  color:#080808;
+}
+.work-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.carousel-card{
+  min-height:420px;
+  display:flex;
+  flex-direction:column;
+  cursor:pointer;
+  transition:.35s var(--ease);
+}
+.carousel-card:hover{
+  transform:translateY(-5px);
+  border-color:var(--line-strong);
+}
+.carousel-media{
+  position:relative;
+  aspect-ratio:4/3;
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+  background:#080808;
+}
+.carousel-media img,.carousel-media video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
   transition:transform .6s var(--ease);
 }
-.project-card:hover .project-thumb img{transform:scale(1.08)}
-.project-info{padding:24px}
-.project-brand{font-size:1.1rem;font-weight:600;margin-bottom:4px}
-.project-category{font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
+.carousel-card:hover .carousel-media img,.carousel-card:hover .carousel-media video{
+  transform:scale(1.05);
+}
+.carousel-info{
+  padding:18px 18px 20px;
+  display:grid;
+  gap:10px;
+}
+.card-topline{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  align-items:center;
+}
+.tag{
+  display:inline-flex;
+  align-items:center;
+  padding:7px 10px;
+  border-radius:999px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--line);
+  font-size:.72rem;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.project-name{
+  font-size:1.35rem;
+  letter-spacing:-.03em;
+  font-weight:700;
+}
+.project-desc{
+  color:var(--muted);
+  font-size:.95rem;
+  line-height:1.7;
+}
+.hidden{display:none !important}
 
-/* ============ BRAND LOGOS SECTION ============ */
-.brands{padding:120px 48px;text-align:center}
-.brands h2{
-  font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,3rem);
-  font-weight:400;margin-bottom:16px;
+/* CONTACT */
+.contact{padding:26px 0 60px}
+.contact-shell{
+  padding:28px;
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:20px;
+  align-items:stretch;
 }
-.brands p{font-size:.85rem;color:var(--muted);margin-bottom:64px;font-weight:300}
-.brand-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:32px;
-  max-width:900px;margin:0 auto;
+.contact-links{
+  display:grid;
+  gap:12px;
+  margin-top:24px;
 }
-.brand-item{
-  padding:24px;display:flex;align-items:center;justify-content:center;
-  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;
-  color:var(--muted);border:1px solid transparent;border-radius:8px;
-  transition:all .3s var(--ease);min-height:80px;
-}
-.brand-item:hover{border-color:var(--border);color:var(--fg);background:var(--card-bg);transform:translateY(-4px);box-shadow:0 8px 32px rgba(0,0,0,.3)}
-
-/* ============ SKILLS ============ */
-.skills-section{
-  padding:120px 48px;background:#111;
-}
-.skills-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px;
-  margin-top:64px;
-}
-.skill-card{
-  background:var(--card-bg);border-radius:12px;padding:40px 32px;
-  border:1px solid var(--border);
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
-}
-.skill-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,.4)}
-.skill-icon{font-size:2rem;margin-bottom:20px}
-.skill-card h3{font-size:1rem;font-weight:600;margin-bottom:8px}
-.skill-card p{font-size:.85rem;color:var(--muted);line-height:1.7;font-weight:300}
-
-/* ============ CONTACT ============ */
-.contact{
-  padding:160px 48px;text-align:center;position:relative;overflow:hidden;
-}
-.contact h2{
-  font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,5rem);
-  font-weight:400;margin-bottom:24px;
-}
-.contact p{font-size:1rem;color:var(--muted);margin-bottom:48px;font-weight:300}
-.contact-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
 .contact-link{
-  display:flex;align-items:center;gap:8px;
-  padding:14px 32px;border:1px solid var(--border);border-radius:100px;
-  font-size:.8rem;letter-spacing:.08em;font-weight:500;
-  transition:all .3s var(--ease);
+  padding:18px 20px;
+  border:1px solid var(--line);
+  border-radius:18px;
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  transition:.25s var(--ease);
 }
-.contact-link:hover{background:var(--fg);color:#0a0a0a;border-color:var(--fg)}
-.contact-link svg{width:16px;height:16px}
-
-/* ============ FOOTER ============ */
-footer{
-  padding:32px 48px;border-top:1px solid var(--border);
-  display:flex;justify-content:space-between;align-items:center;
-  font-size:.7rem;color:var(--muted);letter-spacing:.05em;
+.contact-link:hover{
+  background:rgba(255,255,255,.04);
+  border-color:var(--line-strong);
 }
-
-/* ============ LIGHTBOX ============ */
-.lightbox{
-  position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:10001;
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;visibility:hidden;transition:all .4s var(--ease);cursor:none;
+.contact-media{
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--line);
+  min-height:360px;
 }
-.lightbox.active{opacity:1;visibility:visible}
-.lightbox-content{
-  position:relative;max-width:90vw;max-height:85vh;
-}
-.lightbox-content img{
-  max-width:90vw;max-height:85vh;object-fit:contain;border-radius:4px;
-  transform:scale(.9);transition:transform .4s var(--ease);
-}
-.lightbox.active .lightbox-content img{transform:scale(1)}
-.lightbox-close{
-  position:absolute;top:24px;right:24px;width:48px;height:48px;
-  border:1px solid rgba(255,255,255,.3);border-radius:50%;background:none;
-  color:#fff;font-size:1.2rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  transition:all .3s;z-index:10;
-}
-.lightbox-close:hover{background:#fff;color:#000}
-.lightbox-nav{
-  position:absolute;top:50%;transform:translateY(-50%);
-  width:48px;height:48px;border:1px solid rgba(255,255,255,.3);border-radius:50%;
-  background:none;color:#fff;font-size:1.2rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;transition:all .3s;
-}
-.lightbox-nav:hover{background:#fff;color:#000}
-.lightbox-prev{left:24px}
-.lightbox-next{right:24px}
-.lightbox-caption{
-  position:absolute;bottom:-40px;left:0;right:0;text-align:center;
-  color:rgba(255,255,255,.6);font-size:.8rem;letter-spacing:.1em;
+.contact-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
-/* ============ SCROLL REVEAL ============ */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
+/* MODAL */
+.media-modal{
+  position:fixed;
+  inset:0;
+  z-index:60;
+  display:none;
+  background:rgba(3,3,3,.78);
+  backdrop-filter:blur(18px);
+  padding:24px;
+}
+.media-modal.active{
+  display:grid;
+  place-items:center;
+}
+.media-modal-shell{
+  width:min(1200px,100%);
+  height:min(88vh,920px);
+  padding:18px;
+  display:grid;
+  grid-template-rows:auto 1fr auto;
+  gap:14px;
+}
+.media-modal-top,.media-modal-bottom{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+}
+.media-stage{
+  position:relative;
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  background:#090909;
+}
+.media-stage img,.media-stage video{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  background:#070707;
+}
+.modal-meta h3{
+  font-size:1.2rem;
+  letter-spacing:-.03em;
+}
+.modal-meta p{
+  font-size:.8rem;
+  color:var(--muted);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.modal-caption{
+  color:var(--muted);
+  font-size:.92rem;
+  line-height:1.7;
+}
+.icon-btn{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:1px solid var(--line-strong);
+  background:rgba(255,255,255,.03);
+  color:var(--text);
+  cursor:pointer;
+  transition:.28s var(--ease);
+}
+.icon-btn:hover{
+  background:var(--text);
+  color:#090909;
+}
+.feature-indicator{
+  font-size:.8rem;
+  color:var(--muted);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
 
-/* ============ RESPONSIVE ============ */
-@media(max-width:1024px){
-  .about{grid-template-columns:1fr;gap:48px}
-  .project-grid{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.reveal{
+  opacity:0;
+  transform:translateY(26px);
+  transition:opacity .75s var(--ease),transform .75s var(--ease);
 }
-@media(max-width:768px){
-  nav{padding:16px 24px}
-  .nav-links{display:none}
-  .hero,.about,.work,.brands,.skills-section,.contact{padding-left:24px;padding-right:24px}
-  .hero{min-height:85vh;padding-top:100px}
-  .hero-title{font-size:clamp(2.2rem,10vw,4rem)}
-  .hero-folder:nth-child(1){width:55px;top:8%;right:5%}
-  .hero-folder:nth-child(2){width:40px;top:40%;left:3%}
-  .hero-folder:nth-child(3){width:65px;bottom:22%;right:8%}
-  .hero-folder:nth-child(4){width:35px;top:20%;left:25%}
-  .hero-folder:nth-child(5){width:50px;bottom:35%;left:10%}
-  .hero-folder:nth-child(6){width:30px;top:55%;right:20%}
-  footer{flex-direction:column;gap:8px;text-align:center;padding:24px}
-  .about-stats{grid-template-columns:repeat(3,1fr)}
-  .project-grid{grid-template-columns:1fr}
-  .nav-menu-btn{display:block}
-  .filter-bar{gap:6px}
-  .filter-btn{padding:8px 16px;font-size:.65rem}
-  .contact h2{font-size:clamp(2rem,8vw,3rem)}
-  .brand-grid{grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:16px}
-  .brand-item{padding:16px;font-size:.65rem;min-height:60px}
-  .skill-card{padding:28px 24px}
+.reveal.show{
+  opacity:1;
+  transform:none;
 }
 
-/* Mobile menu */
-.nav-menu-btn{
-  display:none;width:32px;height:20px;position:relative;cursor:pointer;background:none;border:none;
+@media (max-width:1100px){
+  .about-grid,.contact-shell{grid-template-columns:1fr}
+  .service-grid,.work-grid{grid-template-columns:repeat(2,1fr)}
+  .about-layout{grid-template-columns:1fr}
 }
-.nav-menu-btn span{
-  display:block;width:100%;height:1.5px;background:var(--fg);
-  position:absolute;left:0;transition:all .3s;
+@media (max-width:720px){
+  .container{width:min(100vw - 24px,1440px)}
+  .nav-inner{height:auto;padding:14px 0;align-items:flex-start;flex-direction:column}
+  .nav-links{gap:8px}
+  .hero-panel,.about-card,.work-shell,.contact-shell{padding:20px}
+  .hero-foot,.about-stats,.service-grid,.work-grid,.mini-grid{grid-template-columns:1fr}
+  .headline{max-width:none}
+  .hero-kicker,.section-top,.work-top,.media-modal-top,.media-modal-bottom{flex-direction:column;align-items:flex-start}
+  .media-modal{padding:12px}
+  .media-modal-shell{height:min(92vh,900px)}
 }
-.nav-menu-btn span:nth-child(1){top:0}
-.nav-menu-btn span:nth-child(2){top:50%;transform:translateY(-50%)}
-.nav-menu-btn span:nth-child(3){bottom:0}
-@media(max-width:768px){.nav-menu-btn{display:block}}
-
-.mobile-menu{
-  position:fixed;inset:0;background:var(--bg);z-index:999;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;
-  opacity:0;visibility:hidden;transition:all .4s var(--ease);
-}
-.mobile-menu.active{opacity:1;visibility:visible}
-.mobile-menu a{
-  font-family:'Playfair Display',serif;font-size:2rem;font-weight:400;
-  opacity:0;transform:translateY(20px);transition:all .4s var(--ease);
-}
-.mobile-menu.active a{opacity:1;transform:translateY(0)}
-.mobile-menu.active a:nth-child(1){transition-delay:.1s}
-.mobile-menu.active a:nth-child(2){transition-delay:.15s}
-.mobile-menu.active a:nth-child(3){transition-delay:.2s}
-.mobile-menu.active a:nth-child(4){transition-delay:.25s}
-.mobile-menu.active a:nth-child(5){transition-delay:.3s}
 </style>
 </head>
+
 <body>
-
-<!-- CUSTOM CURSOR -->
-<div class="cursor"></div>
-<div class="cursor-follower"></div>
-
-<!-- PRELOADER -->
-<div class="preloader">
-  <div class="preloader-text">
-    <span>D</span><span>E</span><span>X</span><span>&nbsp;</span><span>L</span><span>I</span><span>N</span>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="nav-logo" href="#home"><span class="dot"></span>DEX LIN</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#work">All Work</a>
+      <a href="#contact">Contact</a>
+    </div>
   </div>
-</div>
-
-<!-- NAVIGATION -->
-<nav>
-  <a href="#" class="nav-logo">DEX LIN<span>®</span></a>
-  <div class="nav-links">
-    <a href="#about">About</a>
-    <a href="#work">Work</a>
-    <a href="#brands">Clients</a>
-    <a href="#contact">Contact</a>
-  </div>
-  <button class="nav-menu-btn" onclick="toggleMobileMenu()">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 
-<!-- MOBILE MENU -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="#about" onclick="toggleMobileMenu()">About</a>
-  <a href="#work" onclick="toggleMobileMenu()">Work</a>
-  <a href="#brands" onclick="toggleMobileMenu()">Clients</a>
-  <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
-</div>
+<main id="home" class="container">
+  <!-- HERO -->
+  <section class="hero section">
+    <div class="hero-grid">
+      <article class="hero-panel reveal">
+        <div>
+          <div class="hero-kicker">
+            <span class="eyebrow">Creative Direction • Brand Worlds</span>
+            <p class="hero-right-note"></p>
+          </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-shapes">
-    <div class="hero-folder"><svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16C4 11.58 7.58 8 12 8h20l8 8h48c4.42 0 8 3.58 8 8v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V16z" fill="#5AC8FA"/><path d="M4 24h92v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V24z" fill="#40B4FB"/></svg></div>
-    <div class="hero-folder"><svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16C4 11.58 7.58 8 12 8h20l8 8h48c4.42 0 8 3.58 8 8v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V16z" fill="#5AC8FA"/><path d="M4 24h92v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V24z" fill="#40B4FB"/></svg></div>
-    <div class="hero-folder"><svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16C4 11.58 7.58 8 12 8h20l8 8h48c4.42 0 8 3.58 8 8v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V16z" fill="#5AC8FA"/><path d="M4 24h92v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V24z" fill="#40B4FB"/></svg></div>
-    <div class="hero-folder"><svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16C4 11.58 7.58 8 12 8h20l8 8h48c4.42 0 8 3.58 8 8v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V16z" fill="#5AC8FA"/><path d="M4 24h92v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V24z" fill="#40B4FB"/></svg></div>
-    <div class="hero-folder"><svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16C4 11.58 7.58 8 12 8h20l8 8h48c4.42 0 8 3.58 8 8v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V16z" fill="#5AC8FA"/><path d="M4 24h92v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V24z" fill="#40B4FB"/></svg></div>
-    <div class="hero-folder"><svg viewBox="0 0 100 80" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 16C4 11.58 7.58 8 12 8h20l8 8h48c4.42 0 8 3.58 8 8v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V16z" fill="#5AC8FA"/><path d="M4 24h92v40c0 4.42-3.58 8-8 8H12c-4.42 0-8-3.58-8-8V24z" fill="#40B4FB"/></svg></div>
+          <h1 class="headline" style="margin-top:26px">Don’t <em>Talk to</em> Strangers</h1>
+
+          <p class="body-copy" style="margin-top:22px">Most people are taught not to talk to strangers.
+But every opportunity, every bold idea, and every career-changing collaboration once began with someone unknown.
+
+Creativity starts where familiarity ends.
+It lives in curiosity, in risk, in the courage to start a conversation before certainty exists.
+
+This resume is not just a record of where I’ve worked.
+It is a collection of ideas shaped into experiences, brands shaped into stories, and challenges turned into possibilities.
+
+So maybe, sometimes, you should talk to strangers.</p>
+
+          <div class="hero-actions">
+            <a class="btn primary" href="#work">View Work</a>
+            <a class="btn secondary" href="#contact">Start a Conversation</a>
+          </div>
+        </div>
+
+        <div class="hero-foot">
+          <div class="hero-metric"><strong>13+</strong><span>Years Experience</span></div>
+          <div class="hero-metric"><strong>20+</strong><span>Brand Partners</span></div>
+          <div class="hero-metric"><strong>CN / TW</strong><span>Shanghai • Taipei</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <section class="ticker section reveal">
+    <div class="ticker-shell">
+      <div class="ticker-track">
+        <span>Luxury Fashion</span><span>Campaign Direction</span><span>Retail Experience</span><span>Motion Storytelling</span><span>Social Visual Systems</span><span>Brand Identity</span><span>Interactive Portfolio</span>
+        <span>Luxury Fashion</span><span>Campaign Direction</span><span>Retail Experience</span><span>Motion Storytelling</span><span>Social Visual Systems</span><span>Brand Identity</span><span>Interactive Portfolio</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about section" id="about">
+    <div class="about-grid">
+      <article class="about-card reveal">
+        <div class="about-layout">
+          <div class="portrait">
+            <img src="images/profile/dex.png" alt="Dex Lin" onerror="this.src='images/profile/dex.svg'">
+          </div>
+          <div>
+            <span class="eyebrow">About Dex</span>
+            <h2 class="headline" style="font-size:clamp(2rem,4vw,4rem);margin-top:16px">Hello, <em>I’m______ </em> Dex Lin</h2>
+            <p class="body-copy" style="margin-top:15px">CREATIVE DIRECTOR — 13 YEARS EXPERIENCE
+Traditional & social media advertising creative. From luxury houses to lifestyle brands, I transform ideas into visual narratives that resonate. 從傳統廣告到社群創意，為品牌打造有記憶的視覺敘事。</p>
+            <div class="about-stats">
+              <div class="about-stat"><strong>Luxury</strong><span>Fashion / Beauty / Retail</span></div>
+              <div class="about-stat"><strong>Sport</strong><span>Campaign / Experience</span></div>
+              <div class="about-stat"><strong>Motion</strong><span>Film / Reels / Launches</span></div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="about-card reveal">
+        <div class="mini-grid">
+          <div class="mini-card"><img src="images/luxury/tomford-3.png" alt="Tom Ford"><span class="label">Tom Ford</span></div>
+          <div class="mini-card"><img src="images/sport/puma-4.png" alt="Puma"><span class="label">PUMA</span></div>
+          <div class="mini-card"><img src="images/other/universal-3.png" alt="Universal"><span class="label">Universal</span></div>
+          <div class="mini-card"><video src="images/motion/video-2.mp4" autoplay muted loop playsinline></video><span class="label">Motion</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services section reveal">
+    <div class="section-top">
+      <div>
+        <span class="eyebrow">What you actually sell</span>
+        <h2 class="headline" style="font-size:clamp(2rem,4vw,3.5rem);margin-top:14px">Not just visuals. Positioning, worlds, and attention design.</h2>
+      </div>
+    </div>
+
+    <div class="service-grid">
+<article class="service-card">
+  <span class="num">01</span>
+  <div>
+    <h3>Creative Direction</h3>
+    <p>Lead visual concepts from insight to execution.
+Shape narratives and creative systems.
+Guide teams across design and production.
+Turn strategy into compelling ideas.
+Create work with lasting impact.</p>
+    <p class="zh">從洞察到落地，主導整體視覺概念與創意方向。整合設計、製作與策略團隊，將想法轉化為能打動受眾、推動品牌成長的作品。</p>
   </div>
-  <div class="hero-eyebrow">Creative Director — 13 Years Experience</div>
-  <h1 class="hero-title">Don't <em>talk to</em><br>strangers</h1>
-  <p class="hero-subtitle">
-    Traditional & social media advertising creative. From luxury houses to lifestyle brands,
-    I transform ideas into visual narratives that resonate.
-    <br><span style="font-size:.8rem;opacity:.6;margin-top:8px;display:inline-block">從傳統廣告到社群創意，為品牌打造有溫度的視覺敘事。</span>
-  </p>
-  <div class="hero-scroll">
-    <div class="line"></div>
-    Scroll to explore
+</article>
+
+<article class="service-card">
+  <span class="num">02</span>
+  <div>
+    <h3>Brand & Retail Experience</h3>
+    <p>Design immersive brand experiences across retail, pop-ups, and installations. I translate brand identity into physical environments that feel memorable, elevated, and commercially effective.</p>
+    <p class="zh">打造零售空間、快閃活動與裝置體驗。將品牌精神轉譯為可感知的實體場域，兼具記憶點、美感高度與商業效益。</p>
   </div>
-</section>
+</article>
 
-<!-- MARQUEE -->
-<section class="marquee-section">
-  <div class="marquee-track">
-    <span>Brand Identity</span><span>Art Direction</span><span>Campaign Design</span>
-    <span>Social Media</span><span>Visual Communication</span><span>Illustration</span>
-    <span>Creative Strategy</span><span>Luxury Branding</span>
-    <span>Brand Identity</span><span>Art Direction</span><span>Campaign Design</span>
-    <span>Social Media</span><span>Visual Communication</span><span>Illustration</span>
-    <span>Creative Strategy</span><span>Luxury Branding</span>
+<article class="service-card">
+  <span class="num">03</span>
+  <div>
+    <h3>Motion & Film</h3>
+    <p>Create motion-led campaigns, brand films, and digital storytelling. From storyboard to final frame, I craft visual narratives that bring static ideas to life with rhythm, emotion, and impact.</p>
+    <p class="zh">規劃動態廣告、品牌影片與數位內容敘事。從腳本分鏡到最終畫面，以節奏、情緒與視覺衝擊力，讓概念真正活起來。</p>
   </div>
-</section>
+</article>
 
-<!-- ABOUT -->
-<section class="about" id="about">
-  <div class="about-image reveal">
-    <img src="images/profile/dex.png" alt="Dex Lin" onerror="this.src='images/profile/dex.svg'">
+<article class="service-card">
+  <span class="num">04</span>
+  <div>
+    <h3>Social Visual Systems</h3>
+    <p>Build scalable visual systems for social platforms. I develop content frameworks that keep brands consistent, relevant, and visually strong across fast-moving digital channels.</p>
+    <p class="zh">建立可延展的社群視覺系統。規劃內容架構與設計語言，讓品牌在快速變化的數位平台中保持一致性、話題性與辨識度。</p>
   </div>
-  <div class="about-content">
-    <h2 class="reveal">Hello, I'm <em>Dex</em>.</h2>
-    <p class="reveal reveal-delay-1">
-      Creative Director with 13 years of advertising experience, skilled in both traditional and social media creative communication. I specialize in brand identity, campaign design, and visual storytelling across luxury, sport, lifestyle, and F&B sectors.
-    </p>
-    <p class="reveal reveal-delay-2" style="font-size:.85rem;opacity:.7">
-      擅長品牌全案創意、識別設計與跨媒體創意執行。
-    </p>
-    <div class="about-stats reveal reveal-delay-3">
-      <div class="stat">
-        <div class="stat-number">13+</div>
-        <div class="stat-label">Years Experience</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">20+</div>
-        <div class="stat-label">Brand Partners</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">∞</div>
-        <div class="stat-label">Creative Ideas</div>
-      </div>
-    </div>
-  </div>
-</section>
+</article>    </div>
+  </section>
 
-<!-- WORK -->
-<section class="work" id="work">
-  <div class="section-header">
-    <div>
-      <h2 class="reveal">Selected Work</h2>
-      <p class="reveal reveal-delay-1" style="margin-top:12px">
-        A curated collection of campaigns, branding, and creative direction across industries.
-        <br><span style="font-size:.8rem;opacity:.6">精選跨產業品牌合作案例。</span>
-      </p>
-    </div>
-  </div>
+  <!-- ALL WORK -->
+  <section class="selected-work section" id="work">
+    <article class="work-shell reveal">
+      <div class="work-top">
+        <div>
+          <span class="eyebrow">All Work</span>
+          <h2 class="headline" style="font-size:clamp(2rem,4vw,3.5rem);margin-top:14px">Case Study.</h2>
+        </div>
+        <div class="filters" id="filters"></div>
+      </div>
+      <div class="work-grid" id="workGrid"></div>
+    </article>
+  </section>
 
-  <div class="filter-bar reveal">
-  <button class="filter-btn active" data-filter="all">All</button>
-  <button class="filter-btn" data-filter="luxury">Luxury</button>
-  <button class="filter-btn" data-filter="sport">Sport</button>
-  <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
-  <button class="filter-btn" data-filter="social">F&B / Social</button>
-  <button class="filter-btn" data-filter="motion">Motion</button>
-  <button class="filter-btn" data-filter="other">Other</button>
-</div>
-  </div>
+  <!-- CONTACT -->
+  <section class="contact section" id="contact">
+    <article class="contact-shell reveal">
+      <div>
+        <span class="eyebrow">Contact</span>
+        <h2 class="headline" style="font-size:clamp(2rem,4vw,4rem);margin-top:14px">Let’s Create Together</h2>
+        <p class="body-copy" style="margin-top:20px">Have a project in mind? Let’s talk.
+有合作想法？歡迎聯繫。</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:wonzai21@gmail.com"><span>Email</span><strong>wonzai21@gmail.com</strong></a>
+          <a class="contact-link" href="https://instagram.com/wonzai21" target="_blank" rel="noreferrer"><span>Instagram</span><strong>@wonzai21</strong></a>
+          <a class="contact-link" href="#"><span>Location</span><strong>Shanghai / Taipei</strong></a>
+        </div>
+      </div>
+      <div class="contact-media">
+        <img src="images/other/skp-1.png" alt="Featured installation">
+      </div>
+    </article>
+  </section>
+</main>
 
-  <div class="project-grid" id="projectGrid">
-    <!-- LUXURY -->
-    <div class="project-card reveal" data-category="luxury" data-images="images/luxury/dita-1.png,images/luxury/dita-2.png">
-      <div class="project-thumb"><img src="images/luxury/dita-1.png" alt="Dita"></div>
-      <div class="project-info">
-        <div class="project-brand">DITA</div>
-        <div class="project-category">Luxury Eyewear</div>
+<!-- MODAL -->
+<div class="media-modal" id="mediaModal" aria-hidden="true">
+  <div class="media-modal-shell">
+    <div class="media-modal-top">
+      <div class="modal-meta">
+        <p id="modalCategory">Category</p>
+        <h3 id="modalTitle">Project</h3>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="icon-btn" id="modalPrev" aria-label="Previous">←</button>
+        <button class="icon-btn" id="modalNext" aria-label="Next">→</button>
+        <button class="icon-btn" id="modalClose" aria-label="Close">✕</button>
       </div>
     </div>
-
-    <div class="project-card reveal" data-category="luxury" data-images="images/luxury/tomford-2.png,images/luxury/tomford-1.png,images/luxury/tomford-3.png">
-      <div class="project-thumb"><img src="images/luxury/tomford-1.png" alt="Tom Ford"></div>
-      <div class="project-info">
-        <div class="project-brand">TOM FORD</div>
-        <div class="project-category">Luxury Fashion</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="luxury" data-images="images/luxury/loewe.png">
-      <div class="project-thumb"><img src="images/luxury/loewe.png" alt="Loewe"></div>
-      <div class="project-info">
-        <div class="project-brand">LOEWE</div>
-        <div class="project-category">Luxury Fashion</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="luxury" data-images="images/luxury/bottega.png">
-      <div class="project-thumb"><img src="images/luxury/bottega.png" alt="Bottega Veneta"></div>
-      <div class="project-info">
-        <div class="project-brand">BOTTEGA VENETA</div>
-        <div class="project-category">Luxury Fashion</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="luxury" data-images="images/luxury/valentino.png">
-      <div class="project-thumb"><img src="images/luxury/valentino.png" alt="Valentino"></div>
-      <div class="project-info">
-        <div class="project-brand">VALENTINO</div>
-        <div class="project-category">Luxury Fashion</div>
-      </div>
-    </div>
-<div class="project-card reveal" 
-     data-category="luxury"
-     data-images="images/luxury/miumiu-1.png,images/luxury/miumiu-2.png">
-
-  <div class="project-thumb">
-    <img src="images/luxury/miumiu-1.png" alt="Miu Miu">
-  </div>
-
-  <div class="project-info">
-    <div class="project-brand">MIU MIU</div>
-    <div class="project-category">Luxury Fashion</div>
-  </div>
-</div>
-
-    <!-- SPORT -->
-    <div class="project-card reveal" data-category="sport" data-images="images/sport/puma-1.png,images/sport/puma-2.png,images/sport/puma-3.png,images/sport/puma-4.png,images/sport/puma-5.png,images/sport/puma-6.png,images/sport/puma-7.png">
-      <div class="project-thumb"><img src="images/sport/puma-7.png" alt="PUMA"></div>
-      <div class="project-info">
-        <div class="project-brand">PUMA</div>
-        <div class="project-category">Sportswear Campaign</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="sport" data-images="images/sport/saucony-1.png,images/sport/saucony-2.png,images/sport/saucony-3.png,images/sport/saucony-4.png">
-      <div class="project-thumb"><img src="images/sport/saucony-1.png" alt="Saucony"></div>
-      <div class="project-info">
-        <div class="project-brand">SAUCONY</div>
-        <div class="project-category">Sportswear Campaign</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="sport" data-images="images/sport/supreme-1.png,images/sport/supreme-2.png,images/sport/supreme-3.png">
-      <div class="project-thumb"><img src="images/sport/supreme-2.png" alt="Supreme"></div>
-      <div class="project-info">
-        <div class="project-brand">SUPREME</div>
-        <div class="project-category">Streetwear</div>
-      </div>
-    </div>
-
-    <!-- LIFESTYLE -->
-    <div class="project-card reveal" data-category="lifestyle" data-images="images/lifestyle/cos-1.jpg,images/lifestyle/cos-2.jpg,images/lifestyle/cos-3.jpg,images/lifestyle/cos-4.jpg,images/lifestyle/cos-5.jpg,images/lifestyle/cos-6.jpg">
-      <div class="project-thumb"><img src="images/lifestyle/cos-2.jpg" alt="COS"></div>
-      <div class="project-info">
-        <div class="project-brand">COS</div>
-        <div class="project-category">Lifestyle Fashion</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="lifestyle" data-images="images/lifestyle/apm-1.png,images/lifestyle/apm-2.png,images/lifestyle/apm-3.png">
-      <div class="project-thumb"><img src="images/lifestyle/apm-1.png" alt="APM"></div>
-      <div class="project-info">
-        <div class="project-brand">APM</div>
-        <div class="project-category">Jewelry & Accessories</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="lifestyle" data-images="images/lifestyle/mhd.png">
-      <div class="project-thumb"><img src="images/lifestyle/mhd.png" alt="MHD"></div>
-      <div class="project-info">
-        <div class="project-brand">MHD</div>
-        <div class="project-category">Lifestyle</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="lifestyle" data-images="images/lifestyle/tempur.jpg">
-      <div class="project-thumb"><img src="images/lifestyle/tempur.jpg" alt="Tempur"></div>
-      <div class="project-info">
-        <div class="project-brand">TEMPUR</div>
-        <div class="project-category">Home & Living</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="lifestyle" data-images="images/lifestyle/levis.jpg">
-      <div class="project-thumb"><img src="images/lifestyle/levis.jpg" alt="Levi's"></div>
-      <div class="project-info">
-        <div class="project-brand">LEVI'S</div>
-        <div class="project-category">Lifestyle Denim</div>
-      </div>
-    </div>
-
-    <!-- SOCIAL / F&B -->
-    <div class="project-card reveal" data-category="social" data-images="images/social/perrier-jouet.jpg">
-      <div class="project-thumb"><img src="images/social/perrier-jouet.jpg" alt="Perrier-Jouët"></div>
-      <div class="project-info">
-        <div class="project-brand">PERRIER-JOUËT</div>
-        <div class="project-category">Champagne — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/martell.jpeg">
-      <div class="project-thumb"><img src="images/social/martell.jpeg" alt="Martell"></div>
-      <div class="project-info">
-        <div class="project-brand">MARTELL</div>
-        <div class="project-category">Cognac — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/royal-salute.jpg">
-      <div class="project-thumb"><img src="images/social/royal-salute.jpg" alt="Royal Salute"></div>
-      <div class="project-info">
-        <div class="project-brand">ROYAL SALUTE</div>
-        <div class="project-category">Whisky — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/glenlivet.jpg">
-      <div class="project-thumb"><img src="images/social/glenlivet.jpg" alt="Glenlivet"></div>
-      <div class="project-info">
-        <div class="project-brand">THE GLENLIVET</div>
-        <div class="project-category">Whisky — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/mumm.jpg">
-      <div class="project-thumb"><img src="images/social/mumm.jpg" alt="Mumm"></div>
-      <div class="project-info">
-        <div class="project-brand">G.H. MUMM</div>
-        <div class="project-category">Champagne — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/1664.jpeg">
-      <div class="project-thumb"><img src="images/social/1664.jpeg" alt="1664 Blanc"></div>
-      <div class="project-info">
-        <div class="project-brand">1664 BLANC</div>
-        <div class="project-category">Beer — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/carlsberg.jpg">
-      <div class="project-thumb"><img src="images/social/carlsberg.jpg" alt="Carlsberg"></div>
-      <div class="project-info">
-        <div class="project-brand">CARLSBERG</div>
-        <div class="project-category">Beer — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/brooklyn.jpg">
-      <div class="project-thumb"><img src="images/social/brooklyn.jpg" alt="Brooklyn Brewery"></div>
-      <div class="project-info">
-        <div class="project-brand">BROOKLYN BREWERY</div>
-        <div class="project-category">Craft Beer — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/grimbergen.jpg">
-      <div class="project-thumb"><img src="images/social/grimbergen.jpg" alt="Grimbergen"></div>
-      <div class="project-info">
-        <div class="project-brand">GRIMBERGEN</div>
-        <div class="project-category">Abbey Beer — Social Retainer</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="social" data-images="images/social/jinga.jpeg">
-      <div class="project-thumb"><img src="images/social/jinga.jpeg" alt="Jing-A"></div>
-      <div class="project-info">
-        <div class="project-brand">JING-A</div>
-        <div class="project-category">Craft Beer — Social Retainer</div>
-      </div>
-    </div>
-
-    <!-- OTHER -->
-    <div class="project-card reveal" data-category="other" data-images="images/other/skp-1.png,images/other/skp-2.png,images/other/skp-3.png">
-      <div class="project-thumb"><img src="images/other/skp-2.png" alt="SKP"></div>
-      <div class="project-info">
-        <div class="project-brand">SKP</div>
-        <div class="project-category">Luxury Retail</div>
-      </div>
-    </div>
-
-    <div class="project-card reveal" data-category="other" data-images="images/other/universal-1.jpg,images/other/universal-2.png,images/other/universal-3.png,images/other/universal-4.jpg">
-      <div class="project-thumb"><img src="images/other/universal-3.png" alt="Universal"></div>
-      <div class="project-info">
-        <div class="project-brand">UNIVERSAL</div>
-        <div class="project-category">Entertainment</div>
-      </div>
-    </div>
- 
-<!-- MOTION -->
-<div class="project-card reveal" 
-     data-category="motion"
-     data-videos="images/motion/video-2.mp4,images/motion/video-3.mp4,images/motion/video-1.mov,images/motion/video-4.mov">
-  <div class="project-thumb">
-    <img src="images/motion/video-cover.jpg" alt="Motion Reel">
-  </div>
-  <div class="project-info">
-    <div class="project-brand">MOTION</div>
-    <div class="project-category">Campaign Film</div>
-  </div>
-</div>
-
-</section>
-
-<!-- BRANDS -->
-<section class="brands" id="brands">
-  <h2 class="reveal">Clients & Partners</h2>
-  <p class="reveal reveal-delay-1">Brands I've had the pleasure to work with.<br>
-    <span style="font-size:.8rem;opacity:.6">合作過的品牌夥伴。</span>
-  </p>
-  <div class="brand-grid reveal reveal-delay-2">
-    <div class="brand-item">Chanel</div>
-    <div class="brand-item">Dita</div>
-    <div class="brand-item">Tom Ford</div>
-    <div class="brand-item">Bottega Veneta</div>
-    <div class="brand-item">Loewe</div>
-    <div class="brand-item">Miu Miu</div>
-    <div class="brand-item">Valentino</div>
-    <div class="brand-item">PUMA</div>
-    <div class="brand-item">Saucony</div>
-    <div class="brand-item">Supreme</div>
-    <div class="brand-item">COS</div>
-    <div class="brand-item">Levi's</div>
-    <div class="brand-item">MHD</div>
-    <div class="brand-item">Tempur</div>
-    <div class="brand-item">Sabon</div>
-    <div class="brand-item">APM</div>
-    <div class="brand-item">Martell</div>
-    <div class="brand-item">Royal Salute</div>
-    <div class="brand-item">Perrier-Jouët</div>
-    <div class="brand-item">G.H. Mumm</div>
-    <div class="brand-item">The Glenlivet</div>
-    <div class="brand-item">Carlsberg</div>
-    <div class="brand-item">1664 Blanc</div>
-    <div class="brand-item">Grimbergen</div>
-    <div class="brand-item">Brooklyn</div>
-    <div class="brand-item">Jing-A</div>
-    <div class="brand-item">SKP</div>
-    <div class="brand-item">Universal</div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section class="skills-section">
-  <div class="section-header">
-    <h2 class="reveal">What I Do</h2>
-  </div>
-  <div class="skills-grid">
-    <div class="skill-card reveal">
-      <div class="skill-icon">🎨</div>
-      <h3>Brand Identity</h3>
-      <p>Complete brand identity systems, from logo design to comprehensive brand guidelines. 品牌識別設計</p>
-    </div>
-    <div class="skill-card reveal reveal-delay-1">
-      <div class="skill-icon">📐</div>
-      <h3>Creative Direction</h3>
-      <p>Leading creative teams and campaigns from concept to execution across all touchpoints. 創意總監與全案執行</p>
-    </div>
-    <div class="skill-card reveal reveal-delay-2">
-      <div class="skill-icon">📱</div>
-      <h3>Social Media Creative</h3>
-      <p>Platform-native content strategy and visual design for social media campaigns. 社群媒體創意</p>
-    </div>
-    <div class="skill-card reveal reveal-delay-3">
-      <div class="skill-icon">✏️</div>
-      <h3>Illustration</h3>
-      <p>Custom illustrations and visual assets that bring brand stories to life. 插畫設計</p>
-    </div>
-    <div class="skill-card reveal">
-      <div class="skill-icon">💻</div>
-      <h3>Design Tools</h3>
-      <p>Expert in Photoshop, Illustrator, and InDesign for pixel-perfect execution. 設計軟體專精</p>
-    </div>
-    <div class="skill-card reveal reveal-delay-1">
-      <div class="skill-icon">🗺️</div>
-      <h3>Campaign Strategy</h3>
-      <p>Integrated campaign planning bridging traditional and digital channels. 整合行銷策略</p>
+    <div class="media-stage" id="mediaStage"></div>
+    <div class="media-modal-bottom">
+      <p class="modal-caption" id="modalCaption"></p>
+      <p class="feature-indicator" id="modalCounter">01 / 01</p>
     </div>
   </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact" id="contact">
-  <h2 class="reveal">Let's <em>Create</em><br>Together</h2>
-  <p class="reveal reveal-delay-1">Have a project in mind? Let's talk.<br>
-    <span style="font-size:.85rem;opacity:.6">有合作想法？歡迎聯繫。</span>
-  </p>
-  <div class="contact-links reveal reveal-delay-2">
-    <a href="mailto:wonzai21@gmail.com" class="contact-link">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-      Email
-    </a>
-    <a href="https://instagram.com/wonzai21" target="_blank" class="contact-link">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
-      Instagram
-    </a>
-    <a href="#" class="contact-link" onclick="alert('WeChat: wonzai21');return false">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3c-4.97 0-9 3.58-9 8s4.03 8 9 8c.83 0 1.63-.1 2.4-.29L18 20l-.84-2.52C19.5 16.17 21 14.22 21 12c0-.34-.03-.67-.08-1"/><circle cx="8.5" cy="11" r="1" fill="currentColor"/><circle cx="12" cy="11" r="1" fill="currentColor"/><circle cx="15.5" cy="11" r="1" fill="currentColor"/></svg>
-      WeChat
-    </a>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <span>© 2026 Dex Lin. All Rights Reserved.</span>
-  <span>Creative Director — Shanghai / Taipei</span>
-</footer>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
-  <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
-  <div class="lightbox-content">
-    <img id="lightboxImg" src="" alt="" style="display:none;">
-    <video id="lightboxVideo" controls playsinline style="display:none; max-width:90vw; max-height:85vh; border-radius:4px;">
-      <source id="lightboxVideoSource" src="">
-    </video>
-    <div class="lightbox-caption" id="lightboxCaption"></div>
-  </div>
-  <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
 </div>
 
 <script>
-// ============ PRELOADER ============
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    document.querySelector('.preloader').classList.add('hidden');
-  }, 600);
-});
+const projects = [
+  { name:'PUMA', category:'sport', label:'Sport', type:'image', thumb:'images/sport/puma-7.png', media:['images/sport/puma-1.png','images/sport/puma-2.png','images/sport/puma-3.png','images/sport/puma-4.png','images/sport/puma-5.png','images/sport/puma-6.png','images/sport/puma-7.png'], description:'Sportswear Campaign & Retail Experience.' },
+  { name:'TOM FORD', category:'luxury', label:'Luxury', type:'image', thumb:'images/luxury/tomford-2.png', media:['images/luxury/tomford-2.png','images/luxury/tomford-1.png','images/luxury/tomford-3.png','images/luxury/tomford-4.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'MIU MIU', category:'luxury', label:'Luxury', type:'image', thumb:'images/luxury/miumiu-1.png', media:['images/luxury/miumiu-1.png','images/luxury/miumiu-2.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'MOTION', category:'motion', label:'Motion', type:'video', thumb:'images/motion/video-cover-2.jpg', media:['images/motion/video-2.mp4','images/motion/video-3.mp4','images/motion/video-1.mp4','images/motion/video-4.mp4'], description:'Brand Campaign Shoot.' },
+  { name:'UNIVERSAL', category:'other', label:'Entertainment', type:'image', thumb:'images/other/universal-2.png', media:['images/other/universal-2.png','images/other/universal-1.jpg','images/other/universal-3.png','images/other/universal-4.jpg','images/other/universal-5.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'SKP', category:'other', label:'Luxury Retail', type:'image', thumb:'images/other/skp-2.png', media:['images/other/skp-2.png','images/other/skp-1.png','images/other/skp-3.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'LOEWE', category:'luxury', label:'Luxury', type:'image', thumb:'images/luxury/loewe.png', media:['images/luxury/loewe.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'BOTTEGA VENETA', category:'luxury', label:'Luxury', type:'image', thumb:'images/luxury/bottega.png', media:['images/luxury/bottega.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'DITA', category:'luxury', label:'Luxury Eyewear', type:'image', thumb:'images/luxury/dita-1.png', media:['images/luxury/dita-1.png','images/luxury/dita-2.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'VALENTINO', category:'luxury', label:'Luxury', type:'image', thumb:'images/luxury/valentino.png', media:['images/luxury/valentino.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'SAUCONY', category:'sport', label:'Sport', type:'image', thumb:'images/sport/saucony-1.png', media:['images/sport/saucony-1.png','images/sport/saucony-2.png','images/sport/saucony-3.png','images/sport/saucony-4.png'], description:'Sportswear Campaign & Retail Experience.' },
+  { name:'SUPREME', category:'sport', label:'Streetwear', type:'image', thumb:'images/sport/supreme-1.png', media:['images/sport/supreme-1.png','images/sport/supreme-2.png','images/sport/supreme-3.png'], description:'Sportswear Campaign & Retail Experience.' },
+  { name:'COS', category:'lifestyle', label:'Lifestyle', type:'image', thumb:'images/lifestyle/cos-2.jpg', media:['images/lifestyle/cos-1.jpg','images/lifestyle/cos-2.jpg','images/lifestyle/cos-3.jpg','images/lifestyle/cos-4.jpg','images/lifestyle/cos-5.jpg','images/lifestyle/cos-6.jpg'], description:'Social Media.' },
+  { name:'APM', category:'lifestyle', label:'Jewelry', type:'image', thumb:'images/lifestyle/apm-1.png', media:['images/lifestyle/apm-1.png','images/lifestyle/apm-2.png','images/lifestyle/apm-3.png'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:'TEMPUR', category:'lifestyle', label:'Home & Living', type:'image', thumb:'images/lifestyle/tempur.jpg', media:['images/lifestyle/tempur.jpg'], description:'EXPERIENTIAL / Telling immersive stories.' },
+  { name:"LEVI'S", category:'lifestyle', label:'Lifestyle', type:'image', thumb:'images/lifestyle/levis.jpg', media:['images/lifestyle/levis.jpg'], description:'Social Media.' },
+  { name:'PERRIER-JOUËT', category:'social', label:'Champagne', type:'image', thumb:'images/social/perrier-jouet.jpg', media:['images/social/perrier-jouet.jpg'], description:'Social and campaign.' },
+  { name:'MARTELL', category:'social', label:'Cognac', type:'image', thumb:'images/social/martell.jpeg', media:['images/social/martell.jpeg'], description:'Social and campaign.' },
+  { name:'ROYAL SALUTE', category:'social', label:'Whisky', type:'image', thumb:'images/social/royal-salute.jpg', media:['images/social/royal-salute.jpg'], description:'Social and campaign.' },
+  { name:'THE GLENLIVET', category:'social', label:'Whisky', type:'image', thumb:'images/social/glenlivet.jpg', media:['images/social/glenlivet.jpg'], description:'Social and campaign.' },
+  { name:'1664 BLANC', category:'social', label:'Beer', type:'image', thumb:'images/social/1664.jpeg', media:['images/social/1664.jpeg'], description:'Social and campaign.' },
+  { name:'CARLSBERG', category:'social', label:'Beer', type:'image', thumb:'images/social/carlsberg.jpg', media:['images/social/carlsberg.jpg'], description:'Social and campaign.' },
+  { name:'BROOKLYN BREWERY', category:'social', label:'Craft Beer', type:'image', thumb:'images/social/brooklyn.jpg', media:['images/social/brooklyn.jpg'], description:'Social and campaign.' },
+  { name:'GRIMBERGEN', category:'social', label:'Abbey Beer', type:'image', thumb:'images/social/grimbergen.jpg', media:['images/social/grimbergen.jpg'], description:'Social and campaign.' },
+  { name:'JING-A', category:'social', label:'Craft Beer', type:'image', thumb:'images/social/jinga.jpeg', media:['images/social/jinga.jpeg'], description:'Social and campaign.' }
+];
 
-// ============ CUSTOM CURSOR ============
-const cursor = document.querySelector('.cursor');
-const follower = document.querySelector('.cursor-follower');
-let mouseX = 0, mouseY = 0;
-let followerX = 0, followerY = 0;
+const categories = ['all','luxury','sport','lifestyle','social','motion','other'];
 
-document.addEventListener('mousemove', (e) => {
-  mouseX = e.clientX;
-  mouseY = e.clientY;
-  cursor.style.left = mouseX - 6 + 'px';
-  cursor.style.top = mouseY - 6 + 'px';
-});
+const workGrid = document.getElementById('workGrid');
+const filters = document.getElementById('filters');
+const mediaModal = document.getElementById('mediaModal');
+const mediaStage = document.getElementById('mediaStage');
+const modalTitle = document.getElementById('modalTitle');
+const modalCategory = document.getElementById('modalCategory');
+const modalCaption = document.getElementById('modalCaption');
+const modalCounter = document.getElementById('modalCounter');
 
-function animateFollower() {
-  followerX += (mouseX - followerX) * 0.12;
-  followerY += (mouseY - followerY) * 0.12;
-  follower.style.left = followerX - 20 + 'px';
-  follower.style.top = followerY - 20 + 'px';
-  requestAnimationFrame(animateFollower);
+let modalIndex = 0;
+let modalProject = null;
+
+function mediaMarkup(project, thumbOnly=false){
+  const src = thumbOnly ? project.thumb : project.media[0];
+  if(project.type === 'video'){
+    return `<video src="${src}" ${thumbOnly ? 'muted autoplay loop playsinline' : 'controls playsinline autoplay'}></video>`;
+  }
+  return `<img src="${src}" alt="${project.name}">`;
 }
-animateFollower();
 
-// Cursor hover states
-document.querySelectorAll('a, button, .filter-btn, .brand-item').forEach(el => {
-  el.addEventListener('mouseenter', () => follower.classList.add('hover'));
-  el.addEventListener('mouseleave', () => follower.classList.remove('hover'));
-});
-document.querySelectorAll('.project-card').forEach(el => {
-  el.addEventListener('mouseenter', () => { follower.classList.add('project-hover'); follower.classList.remove('hover'); });
-  el.addEventListener('mouseleave', () => follower.classList.remove('project-hover'));
-});
-
-// ============ SCROLL NAV ============
-window.addEventListener('scroll', () => {
-  document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 50);
-});
-
-// ============ MOBILE MENU ============
-function toggleMobileMenu() {
-  document.getElementById('mobileMenu').classList.toggle('active');
+function createCard(project){
+  const article = document.createElement('article');
+  article.className = 'carousel-card';
+  article.dataset.category = project.category;
+  article.innerHTML = `
+    <div class="carousel-media">${mediaMarkup(project,true)}</div>
+    <div class="carousel-info">
+      <div class="card-topline">
+        <span class="tag">${project.label}</span>
+        <span class="feature-indicator">${project.type === 'video' ? 'Video' : 'Gallery'}</span>
+      </div>
+      <h3 class="project-name">${project.name}</h3>
+      <p class="project-desc">${project.description}</p>
+    </div>
+  `;
+  article.addEventListener('click', () => openModal(project,0));
+  return article;
 }
 
-// ============ SCROLL REVEAL ============
-const revealElements = document.querySelectorAll('.reveal');
-const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-    }
-  });
-}, observerOptions);
-revealElements.forEach(el => observer.observe(el));
+projects.forEach(project => workGrid.appendChild(createCard(project)));
 
-// ============ FILTER ============
-const filterBtns = document.querySelectorAll('.filter-btn');
-const projectCards = document.querySelectorAll('.project-card');
-const projectGrid = document.getElementById('projectGrid');
-
-filterBtns.forEach(btn => {
+categories.forEach((cat, i) => {
+  const btn = document.createElement('button');
+  btn.className = `filter-btn ${i === 0 ? 'active' : ''}`;
+  btn.textContent = cat === 'all' ? 'All' : cat.charAt(0).toUpperCase() + cat.slice(1);
+  btn.dataset.filter = cat;
   btn.addEventListener('click', () => {
-    filterBtns.forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.filter-btn').forEach(el => el.classList.remove('active'));
     btn.classList.add('active');
-    const filter = btn.dataset.filter;
 
-    projectCards.forEach(card => {
-      if (filter === 'all' || card.dataset.category === filter) {
-        card.classList.remove('hidden');
-        card.style.display = '';
-      } else {
-        card.classList.add('hidden');
-        card.style.display = 'none';
-      }
+    document.querySelectorAll('#workGrid .carousel-card').forEach(card => {
+      const match = cat === 'all' || card.dataset.category === cat;
+      card.classList.toggle('hidden', !match);
     });
   });
+  filters.appendChild(btn);
 });
 
-// ============ LIGHTBOX ============
-let currentMedia = [];
-let currentIndex = 0;
-let currentBrand = '';
-let currentMediaType = 'image';
-
-document.querySelectorAll('.project-card').forEach(card => {
-  card.addEventListener('click', () => {
-    const brand = card.querySelector('.project-brand').textContent;
-
-    if (card.dataset.videos) {
-      const videos = card.dataset.videos.split(',');
-      openLightbox(videos, 0, brand, 'video');
-    } else if (card.dataset.images) {
-      const images = card.dataset.images.split(',');
-      openLightbox(images, 0, brand, 'image');
-    }
-  });
-});
-
-function openLightbox(media, index, brand, type) {
-  currentMedia = media;
-  currentIndex = index;
-  currentBrand = brand;
-  currentMediaType = type;
-  updateLightbox();
-  document.getElementById('lightbox').classList.add('active');
+function openModal(project, index){
+  modalProject = project;
+  modalIndex = index;
+  mediaModal.classList.add('active');
   document.body.style.overflow = 'hidden';
+  renderModalMedia();
 }
 
-function closeLightbox() {
-  document.getElementById('lightbox').classList.remove('active');
+function renderModalMedia(){
+  if(!modalProject) return;
+  const src = modalProject.media[modalIndex];
+
+  modalTitle.textContent = modalProject.name;
+  modalCategory.textContent = modalProject.label;
+  modalCaption.textContent = modalProject.description;
+  modalCounter.textContent = `${String(modalIndex + 1).padStart(2,'0')} / ${String(modalProject.media.length).padStart(2,'0')}`;
+
+  if(modalProject.type === 'video'){
+    mediaStage.innerHTML = `<video src="${src}" controls autoplay playsinline></video>`;
+  }else{
+    mediaStage.innerHTML = `<img src="${src}" alt="${modalProject.name}">`;
+  }
+}
+
+function changeModal(step){
+  if(!modalProject) return;
+  modalIndex = (modalIndex + step + modalProject.media.length) % modalProject.media.length;
+  renderModalMedia();
+}
+
+function closeModal(){
+  mediaModal.classList.remove('active');
   document.body.style.overflow = '';
-
-  const video = document.getElementById('lightboxVideo');
-  if (video) {
-    video.pause();
-    video.currentTime = 0;
-  }
+  mediaStage.innerHTML = '';
+  modalProject = null;
 }
 
-function navigateLightbox(dir) {
-  currentIndex = (currentIndex + dir + currentMedia.length) % currentMedia.length;
-  updateLightbox();
-}
+document.getElementById('modalPrev').addEventListener('click', () => changeModal(-1));
+document.getElementById('modalNext').addEventListener('click', () => changeModal(1));
+document.getElementById('modalClose').addEventListener('click', closeModal);
 
-function updateLightbox() {
-  const img = document.getElementById('lightboxImg');
-  const video = document.getElementById('lightboxVideo');
-  const videoSource = document.getElementById('lightboxVideoSource');
-  const caption = document.getElementById('lightboxCaption');
+mediaModal.addEventListener('click', (e) => {
+  if(e.target === mediaModal) closeModal();
+});
 
-  if (currentMediaType === 'video') {
-    img.style.display = 'none';
-    video.style.display = 'block';
-    video.pause();
-
-    videoSource.src = currentMedia[currentIndex];
-
-    if (currentMedia[currentIndex].toLowerCase().endsWith('.mp4')) {
-      videoSource.type = 'video/mp4';
-    } else if (currentMedia[currentIndex].toLowerCase().endsWith('.mov')) {
-      videoSource.type = 'video/quicktime';
-    } else {
-      videoSource.type = '';
-    }
-
-    video.load();
-  } else {
-    video.pause();
-    video.style.display = 'none';
-    img.style.display = 'block';
-    img.src = currentMedia[currentIndex];
-  }
-
-  caption.textContent =
-    currentBrand + (currentMedia.length > 1 ? ` — ${currentIndex + 1} / ${currentMedia.length}` : '');
-}
-
-// Keyboard navigation
 document.addEventListener('keydown', (e) => {
-  if (!document.getElementById('lightbox').classList.contains('active')) return;
-  if (e.key === 'Escape') closeLightbox();
-  if (e.key === 'ArrowLeft') navigateLightbox(-1);
-  if (e.key === 'ArrowRight') navigateLightbox(1);
+  if(e.key === 'Escape' && mediaModal.classList.contains('active')) closeModal();
+  if(e.key === 'ArrowRight' && mediaModal.classList.contains('active')) changeModal(1);
+  if(e.key === 'ArrowLeft' && mediaModal.classList.contains('active')) changeModal(-1);
 });
 
-// Click outside to close
-document.getElementById('lightbox').addEventListener('click', (e) => {
-  if (e.target === document.getElementById('lightbox')) closeLightbox();
-});
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting) entry.target.classList.add('show');
+  });
+},{threshold:.12});
 
-// ============ MAGNETIC HOVER ON BRAND ITEMS ============
-document.querySelectorAll('.brand-item').forEach(item => {
-  item.addEventListener('mousemove', (e) => {
-    const rect = item.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    item.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) translateY(-4px)`;
-  });
-  item.addEventListener('mouseleave', () => {
-    item.style.transform = '';
-  });
-});
-
-// ============ PARALLAX HERO FOLDERS ============
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  document.querySelectorAll('.hero-folder').forEach((folder, i) => {
-    folder.style.transform = `translateY(${scrollY * (0.08 + i * 0.03)}px)`;
-  });
-});
-
-// ============ SMOOTH SCROLL FOR ANCHOR LINKS ============
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function(e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  });
-});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
