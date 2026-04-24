@@ -591,6 +591,29 @@ button{font:inherit}
   opacity:0;
   transform:translateY(26px);
   transition:opacity .75s var(--ease),transform .75s var(--ease);
+  @media (max-width:720px){
+  .reveal{
+    opacity:1 !important;
+    transform:none !important;
+  }
+
+  .selected-work,
+  .work-shell,
+  #workGrid{
+    display:block;
+    opacity:1 !important;
+    visibility:visible !important;
+  }
+
+  .work-grid{
+    display:grid !important;
+    grid-template-columns:1fr !important;
+    gap:18px;
+  }
+
+  .carousel-card{
+    display:flex !important;
+  }
 }
 .reveal.show{
   opacity:1;
@@ -661,7 +684,7 @@ So maybe, sometimes, you should talk to strangers.</p>
         <div class="hero-foot">
           <div class="hero-metric"><strong>13+</strong><span>Years Experience</span></div>
           <div class="hero-metric"><strong>20+</strong><span>Brand Partners</span></div>
-          <div class="hero-metric"><strong>CN / TW</strong><span>Shanghai • Taipei</span></div>
+          <div class="hero-metric"><strong>CN / TPE</strong><span>Shanghai • Taipei</span></div>
         </div>
       </article>
     </div>
